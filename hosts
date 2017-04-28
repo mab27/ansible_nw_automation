@@ -1,0 +1,5 @@
+# This is the default ansible 'hosts' file.
+
+[vmx]
+vmx1   junos_host=192.168.0.30
+vmx2   junos_host=192.168.0.40
