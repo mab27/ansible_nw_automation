@@ -1,5 +1,5 @@
 ---
- - name: create BGP junos configuration
+ - name: Create BGP junos configuration
    hosts: vmx
    connection: local
    gather_facts: no
@@ -11,25 +11,28 @@
          src: "{{ playbook_dir }}/bgp.j2"
          dest: "{{ playbook_dir }}/{{ inventory_hostname }}.conf"
 
-     - name: push bgp configuration on devices
+     - name: Push bgp configuration on devices
        junos_template:
          provider: "{{ credentials }}"
+         #host: "{{ junos_host }}"
+         #username: mab
+         #password: mab123
          src: "{{playbook_dir}}/{{ inventory_hostname }}.conf"
 
- - name: wait for peers to establish connections
+ - name: Wait for peers to establish connections
    hosts: localhost
    gather_facts: no
 
    tasks:
-   - pause: seconds=25
+   - pause: seconds=15
 
- - name: check bgp states
+ - name: Check bgp states
    hosts: vmx
    connection: local
    gather_facts: no
 
    tasks:
-   - name: check bgp peers states
+   - name: Check bgp peers states
      junos_command:
       provider: "{{  credentials }}"
       commands:

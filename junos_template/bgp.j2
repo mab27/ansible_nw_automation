@@ -15,6 +15,7 @@ protocols {
     }
 }
 routing-options {
+	router-id {{ loopback }};
     forwarding-table {
         export bgp-ecmp;
     }

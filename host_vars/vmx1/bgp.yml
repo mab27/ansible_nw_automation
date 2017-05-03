@@ -1,8 +1,10 @@
 ---
 local_asn: 101
+loopback: 30.30.30.30
 neighbors:
-   - interface: ge-0/0/0
-     name: to vmx2
+   - interface: ge-0/0/1
+     #name: to vmx2
      asn: 102
      peer_ip: 172.16.0.40
-     local_ip: 172.16.0.30
+     #local_ip: 172.16.0.30
+
