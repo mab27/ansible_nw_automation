@@ -13,10 +13,13 @@
 
      - name: Push bgp configuration on devices
        junos_template:
-         provider: "{{ credentials }}"
-         #host: "{{ junos_host }}"
-         #username: mab
-         #password: mab123
+        #Un-comment this section if you are using Ansible in password mode (group_vars/vmx/credentials.yml)
+         #provider: "{{ credentials }}"
+        #Un-comment this section if you are using Ansible in SSH mode
+         provider:
+          username: "mab"
+          host: "{{ junos_host }}"
+          ssh_keyfile: /home/mab/.ssh/id_rsa.pub
          src: "{{playbook_dir}}/{{ inventory_hostname }}.conf"
 
  - name: Wait for peers to establish connections
@@ -34,7 +37,13 @@
    tasks:
    - name: Check bgp peers states
      junos_command:
-      provider: "{{  credentials }}"
+      #Un-comment this section if you are using Ansible in password mode (group_vars/vmx/credentials.yml)
+       #provider: "{{ credentials }}"
+      #Un-comment this section if you are using Ansible in SSH mode
+      provider:
+        username: "mab"
+        host: "{{ junos_host }}"
+        ssh_keyfile: /home/mab/.ssh/id_rsa.pub
       commands:
        - show bgp neighbor "{{ item.peer_ip }}"
       waitfor:
