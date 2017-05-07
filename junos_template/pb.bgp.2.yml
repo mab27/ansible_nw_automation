@@ -17,9 +17,9 @@
          #provider: "{{ credentials }}"
         #Un-comment this section if you are using Ansible in SSH mode
          provider:
-          username: "mab"
-          host: "{{ junos_host }}"
-          ssh_keyfile: /home/mab/.ssh/id_rsa.pub
+          username: "{{ credentials.username }}"
+          host: "{{ credentials.host }}"
+          ssh_keyfile: "{{ credentials.ssh_key }}"
          src: "{{playbook_dir}}/{{ inventory_hostname }}.conf"
 
  - name: Wait for peers to establish connections
@@ -41,9 +41,9 @@
        #provider: "{{ credentials }}"
       #Un-comment this section if you are using Ansible in SSH mode
       provider:
-        username: "mab"
-        host: "{{ junos_host }}"
-        ssh_keyfile: /home/mab/.ssh/id_rsa.pub
+          username: "{{ credentials.username }}"
+          host: "{{ credentials.host }}"
+          ssh_keyfile: "{{ credentials.ssh_key }}"
       commands:
        - show bgp neighbor "{{ item.peer_ip }}"
       waitfor:
